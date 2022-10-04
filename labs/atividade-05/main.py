@@ -1,28 +1,54 @@
 
-def maximizar_troca_de_figurinhas(figurinhas_da_maria, figurinhas_do_joao):
-    troca = 0
-    repete = 0
-    for figurinhas_da_maria in figurinhas_da_maria:
-        troca += 1      
-        if figurinhas_da_maria not in figurinhas_do_joao:
-            x = figurinhas_do_joao
-            figurinhas_do_joao = figurinhas_da_maria
-            figurinhas_da_maria = x
+def maximizar_troca_de_figurinhas(figurinhas_da_maria, figurinhas_da_joao): 
+    poggers = 0
+    menor = len(figurinhas_da_maria)
+    menor2 = len(figurinhas_da_joao)
+    if menor > menor2:
+        menor = menor2
+
+
+    for figurinha1 in figurinhas_da_maria:
+        for figurinha2 in figurinhas_da_maria:
+            if figurinha1 == figurinha2:
+                poggers += 1
+        if poggers != 1:
+            figurinhas_da_maria.remove(figurinha1)
+        poggers = 0
+
+    for figurinha1 in figurinhas_da_joao:
+        for figurinha2 in figurinhas_da_joao:
+            if figurinha1 == figurinha2:
+                poggers += 1
+        if poggers != 1:
+            figurinhas_da_joao.remove(figurinha1)
+        poggers = 0    
+
+        if menor == menor2:
+            for figurinha1 in figurinhas_da_joao:
+                for figurinha2 in figurinhas_da_maria:
+                    if figurinha1 == figurinha2:
+                        poggers += 1
+                if poggers >= 1:
+                    figurinhas_da_joao.remove(figurinha1)
+                poggers = 0   
+            troca = len(figurinhas_da_joao)     
         else:
-            troca -= 1 
-        if figurinhas_da_maria in figurinhas_da_joao:
-            repete += 2
-    troca -= repete 
-    if troca < 0:
-        troca = 0                   
+            for figurinha1 in figurinhas_da_maria:
+                for figurinha2 in figurinhas_da_joao:
+                    if figurinha1 == figurinha2:
+                        poggers += 1
+                if poggers >= 1:
+                    figurinhas_da_maria.remove(figurinha1)
+                poggers = 0            
+            troca = len(figurinhas_da_maria)   
+
+
+
     return troca
 
-
-
 if __name__ == '__main__':
-    A, B = input("escreva quantas figurinhas maria e joão tem, respectivamente, separadas por um espaço: ").split(' ')
-    figurinhas_da_maria = input("escreva as figurinhas que Maria tem, separadas por espaço: ").split(' ')
-    figurinhas_da_joao = input("escreva as figurinhas que João tem, separadas por espaço: ").split(' ')
-    print("FIGURINHAS TROCADAS: ")
+    A, B = input().split(' ')
+    figurinhas_da_maria = input().split(' ')
+    figurinhas_da_joao = input().split(' ')
     print(maximizar_troca_de_figurinhas(figurinhas_da_maria, figurinhas_da_joao))
     
